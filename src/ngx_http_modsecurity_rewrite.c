@@ -82,7 +82,7 @@ ngx_http_modsecurity_rewrite_handler(ngx_http_request_t *r)
         if (client_addr == (char*)-1) {
             return NGX_HTTP_INTERNAL_SERVER_ERROR;
         }
-        const char *server_addr = inet_ntoa(((struct sockaddr_in *) connection->sockaddr)->sin_addr);
+        const char *server_addr = inet_ntoa(((struct sockaddr_in *) connection->listening->sockaddr)->sin_addr);
         old_pool = ngx_http_modsecurity_pcre_malloc_init(r->pool);
         ret = msc_process_connection(ctx->modsec_transaction,
             client_addr, client_port,
